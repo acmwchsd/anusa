@@ -1,5 +1,3 @@
-# BuildKit reads <Dockerfile>.dockerignore; the build context is api/,
-# so send only what the Dockerfile copies (never .venv/ or data/)
 *
 !requirements.txt
 !app
