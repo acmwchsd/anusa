@@ -1,0 +1,7 @@
+# the image builds its own node_modules and build/
+node_modules
+build
+.svelte-kit
+.vscode
+.DS_Store
+Dockerfile

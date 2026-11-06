@@ -1,0 +1,8 @@
+models/*
+!models/.gitkeep
+__pycache__/
+.venv/
+.pytest_cache/
+
+data/
+api/data/

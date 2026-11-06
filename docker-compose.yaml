@@ -1,0 +1,31 @@
+name: techpreneure-cam
+
+services:
+  api:
+    build: ./api
+    restart: unless-stopped
+    expose:
+      - "8000"                      
+    volumes:
+      - ./models:/models
+      - ./data/faces:/data          
+    environment:
+      SPEECH: local                 
+      WHISPER_MODEL: ggml-base.en.bin
+      WHISPER_THREADS: "4"          
+      THREADS: "4"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 60s           
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    ports:
+      - "3000:80"                  
+    depends_on:
+      api:
+        condition: service_healthy  
